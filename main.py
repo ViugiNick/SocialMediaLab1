@@ -24,8 +24,8 @@ def getClassifier(train_data, test_data, text_name = 'TweetText', label_name = '
 
     print('Classifier accuracy:')
     print(accuracy_score(test_data[label_name], bayesAns))
-    #print(classification_report(test_data[label_name], bayesAns))
-    #print(confusion_matrix(test_data[label_name], bayesAns))
+    print(classification_report(test_data[label_name], bayesAns))
+    print(confusion_matrix(test_data[label_name], bayesAns))
 
     return bayesClf
 
