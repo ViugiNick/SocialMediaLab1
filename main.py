@@ -58,10 +58,10 @@ if options.mode == 'sentiment':
         clf = getDictionarySentiment(train_data, test_data)
     if clf_id == 2:
         print('You selected RandomForest classifier')
-        clf = getClassifier(train_data, test_data, clf = RandomForestClassifier())
+        clf = getClassifier(train_data, test_data, clf = RandomForestClassifier(n_estimators = 100))
     if clf_id == 3:
         print('You selected Bayes classifier')
-        clf = getClassifier(train_data, test_data, clf = MultinomialNB(alpha=2.07, fit_prior=True))
+        clf = getClassifier(train_data, test_data, clf = MultinomialNB(alpha=0.1, fit_prior=True))
 
     while True:
         print('Enter your tweet:')
@@ -83,7 +83,7 @@ if options.mode == 'company':
         clf = getClassifier(train_data, test_data, text_name = 'TweetText', label_name = 'Topic', clf = RandomForestClassifier())
     if clf_id == 2:
         print('You selected Bayes classifier')
-        clf = getClassifier(train_data, test_data, text_name = 'TweetText', label_name = 'Topic', clf = MultinomialNB(alpha=1, fit_prior=True))
+        clf = getClassifier(train_data, test_data, text_name = 'TweetText', label_name = 'Topic', clf = MultinomialNB(alpha=0.1, fit_prior=True))
 
     while True:
         print('Enter your tweet:')
