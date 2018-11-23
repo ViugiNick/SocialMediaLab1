@@ -5,7 +5,7 @@ from bayes import MyBayesClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, classification_report
 
 def getDictionarySentiment(train_data, test_data):
     dictSentiment = DictionarySentiment(test_data, -0.1, 0.485)
@@ -24,7 +24,8 @@ def getClassifier(train_data, test_data, text_name = 'TweetText', label_name = '
 
     print('Classifier accuracy:')
     print(accuracy_score(test_data[label_name], bayesAns))
-    print(confusion_matrix(test_data['Sentiment'], bayesAns))
+    #print(classification_report(test_data[label_name], bayesAns))
+    #print(confusion_matrix(test_data[label_name], bayesAns))
 
     return bayesClf
 
@@ -80,10 +81,10 @@ if options.mode == 'company':
 
     if clf_id == 1:
         print('You selected RandomForest classifier')
-        clf = getClassifier(train_data, test_data, text_name = 'TweetText', label_name = 'Topic', clf = RandomForestClassifier())
+        clf = getClassifier(train_data, test_data, text_name = 'TweetText', label_name = 'Topic', clf = RandomForestClassifier(n_estimators=100))
     if clf_id == 2:
         print('You selected Bayes classifier')
-        clf = getClassifier(train_data, test_data, text_name = 'TweetText', label_name = 'Topic', clf = MultinomialNB(alpha=0.1, fit_prior=True))
+        clf = getClassifier(train_data, test_data, text_name = 'TweetText', label_name = 'Topic', clf = MultinomialNB(alpha=0.2, fit_prior=True))
 
     while True:
         print('Enter your tweet:')
@@ -106,9 +107,6 @@ if options.mode == 'mixed':
 
     for i,row in test_data.iterrows():
         row['TweetText'] += ' $' + row['Topic'] + '$'
-
-    print(train_data.head())
-    print(test_data.head())
 
     if clf_id == 1:
         print('You selected RandomForest classifier')
