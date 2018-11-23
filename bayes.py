@@ -25,9 +25,6 @@ class MyBayesClassifier(object):
 
         train_y = train[self.label_name].values.tolist()
 
-        print(len(messages))
-        print(len(train_y))
-
         self.NBclassifier.fit(messages, train_y)
 
 

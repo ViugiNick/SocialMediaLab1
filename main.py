@@ -5,8 +5,7 @@ from bayes import MyBayesClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.utils import shuffle
-import nltk
+from sklearn.metrics import confusion_matrix
 
 def getDictionarySentiment(train_data, test_data):
     dictSentiment = DictionarySentiment(test_data, -0.1, 0.485)
@@ -14,10 +13,10 @@ def getDictionarySentiment(train_data, test_data):
 
     print('SentiWordNet accuracy:')
     print(accuracy_score(test_data['Sentiment'], dictAns))
+
     return dictSentiment
 
 def getClassifier(train_data, test_data, text_name = 'TweetText', label_name = 'Sentiment', clf = None):
-    print(text_name, label_name)
     bayesClf = MyBayesClassifier(text_name, label_name, clf)
 
     bayesClf.fit(train_data)

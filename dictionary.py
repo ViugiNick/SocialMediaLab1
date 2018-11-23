@@ -13,7 +13,7 @@ class DictionarySentiment(object):
 
     def classify(self, message):
         message = message.strip()
-        message = ''.join([char for char in message if char not in '@#"\''])
+        #message = ''.join([char for char in message if char not in '@#"\''])
         message = " ".join([word for word in message.split()
                             if 'http' not in word
                             ])
