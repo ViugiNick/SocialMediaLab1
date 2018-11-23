@@ -7,7 +7,7 @@ Console application for tweet classification:
 2. company - Company classification using tweets
 3. mixed - Sentiment classification using tweets and companies
 
-## Modes
+## Usage
 You can specify train and test files (--train, --test options) and mode(--mode option)
 
 After running the application, just select classifier and follow the instructions
