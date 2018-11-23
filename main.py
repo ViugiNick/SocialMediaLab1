@@ -100,16 +100,32 @@ if options.mode == 'mixed':
     clf_id = int(input())
     assert (clf_id == 1 or clf_id == 2)
 
+
+    for i,row in train_data.iterrows():
+        row['TweetText'] += ' $' + row['Topic'] + '$'
+
+    for i,row in test_data.iterrows():
+        row['TweetText'] += ' $' + row['Topic'] + '$'
+
+    print(train_data.head())
+    print(test_data.head())
+
     if clf_id == 1:
         print('You selected RandomForest classifier')
-        clf = getClassifier(train_data, test_data, text_name = 'TweetText', label_name = 'Topic', clf = RandomForestClassifier())
+        clf = getClassifier(train_data, test_data, clf=RandomForestClassifier(n_estimators=100))
     if clf_id == 2:
         print('You selected Bayes classifier')
-        clf = getClassifier(train_data, test_data, text_name = 'TweetText', label_name = 'Topic', clf = MultinomialNB(alpha=1, fit_prior=True))
+        clf = getClassifier(train_data, test_data, clf=MultinomialNB(alpha=0.1, fit_prior=True))
 
     while True:
         print('Enter your tweet:')
         tweet = input()
         if tweet == 'exit':
             break
-        print(clf.classify(tweet))
+
+        print('Enter company name:')
+        company_name = input()
+
+        if company_name == 'exit':
+            break
+        print(clf.classify(tweet + ' $' + company_name + '$'))
